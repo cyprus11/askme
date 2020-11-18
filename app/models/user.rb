@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+  validates :email, format: { with: /\A[a-z0-9\_]+\.?[a-z0-9\_.]+@[a-z0-9\.]+\.[a-z]+\z/,
+                              message: 'invalid email syntax' }
+  validates :username, length: { maximum: 40 }
+  validates :username, format: { with: /[a-zA-Z0-9_]+/ }
 
   attr_accessor :password
 
