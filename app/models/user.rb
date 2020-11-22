@@ -1,26 +1,27 @@
 require 'openssl'
 
 class User < ApplicationRecord
-
   ITERATIONS = 28000
   DIGEST = OpenSSL::Digest::SHA256.new
+  EMAIL_REGEX = /\A[a-z0-9\_]+\.?[a-z0-9\_.]+@[a-z0-9\.]+\.[a-z]+\z/
+  USERNAME_REGEX = /\w+/
+
+  attr_accessor :password
 
   has_many :questions
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
-  validates :email, format: { with: /\A[a-z0-9\_]+\.?[a-z0-9\_.]+@[a-z0-9\.]+\.[a-z]+\z/,
-                              message: 'invalid email syntax' }
+  validates :email, format: { with: EMAIL_REGEX }
   validates :username, length: { maximum: 40 }
-  validates :username, format: { with: /[a-zA-Z0-9_]+/ }
+  validates :username, format: { with: USERNAME_REGEX }
+  validates :password, presence: true, on: :create
+  validates :password, confirmation: true
 
-  attr_accessor :password
-
-  validates_presence_of :password, on: :create
-  validates_confirmation_of :password
-
-  before_validation :downcase_username, on: :create
+  before_validation :downcase_username_and_email
   before_save :encrypt_password
+
+  private
 
   def encrypt_password
     if self.password.present?
@@ -46,7 +47,8 @@ class User < ApplicationRecord
     end
   end
 
-  def downcase_username
-    self.username.downcase!
+  def downcase_username_and_email
+    username&.downcase!
+    email&.downcase!
   end
 end
