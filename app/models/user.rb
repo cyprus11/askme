@@ -4,14 +4,14 @@ class User < ApplicationRecord
   ITERATIONS = 28000
   DIGEST = OpenSSL::Digest::SHA256.new
   EMAIL_REGEX = /\A[a-z0-9\_]+\.?[a-z0-9\_.]+@[a-z0-9\.]+\.[a-z]+\z/
-  USERNAME_REGEX = /\w+/
+  USERNAME_REGEX = /\A\w+\z/
 
   attr_accessor :password
 
   has_many :questions
 
   validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
+  validates :email, :username, uniqueness: true, on: :create
   validates :email, format: { with: EMAIL_REGEX }
   validates :username, length: { maximum: 40 }
   validates :username, format: { with: USERNAME_REGEX }
@@ -20,6 +20,20 @@ class User < ApplicationRecord
 
   before_validation :downcase_username_and_email
   before_save :encrypt_password
+
+  def self.hash_to_string(password_hash)
+    password_hash.unpack("H*")[0]
+  end
+
+  def self.authenticate(email, password)
+    user = find_by(email: email&.downcase)
+
+    if user.present? && user.password_hash == User.hash_to_string(OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
+      user
+    else
+      nil
+    end
+  end
 
   private
 
@@ -30,20 +44,6 @@ class User < ApplicationRecord
       self.password_hash = User.hash_to_string(
         OpenSSL::PKCS5.pbkdf2_hmac(self.password, self.password_salt, ITERATIONS, DIGEST.length, DIGEST)
       )
-    end
-  end
-
-  def self.hash_to_string(password_hash)
-    password_hash.unpack("H*")[0]
-  end
-
-  def self.authenticate(email, password)
-    user = find_by(email: email)
-
-    if user.present? && user.password_hash == User.hash_to_string(OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
-      user
-    else
-      nil
     end
   end
 
