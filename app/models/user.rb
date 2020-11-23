@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :questions
 
   validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true, on: :create
+  validates :email, :username, uniqueness: true
   validates :email, format: { with: EMAIL_REGEX }
   validates :username, length: { maximum: 40 }
   validates :username, format: { with: USERNAME_REGEX }
@@ -20,6 +20,7 @@ class User < ApplicationRecord
 
   before_validation :downcase_username_and_email
   before_save :encrypt_password
+  before_create :downcase_username_and_email
 
   def self.hash_to_string(password_hash)
     password_hash.unpack("H*")[0]
