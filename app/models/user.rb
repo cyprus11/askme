@@ -20,7 +20,6 @@ class User < ApplicationRecord
 
   before_validation :downcase_username_and_email
   before_save :encrypt_password
-  before_create :downcase_username_and_email
 
   def self.hash_to_string(password_hash)
     password_hash.unpack("H*")[0]
