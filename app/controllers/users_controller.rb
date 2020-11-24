@@ -1,39 +1,50 @@
 class UsersController < ApplicationController
-  def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Vadim',
-        username: 'installero',
-        avatar_url: "https://avatars.mds.yandex.net/get-kino-vod-films-gallery/28788/47e2fd514411e18b76af786d7417062d/280x178_2"
-      ),
 
-      User.new(
-        id: 2,
-        name: 'Misha',
-        username: 'misha'
-      )
-    ]
+  before_action :load_user, except: [:index, :new, :create]
+
+  def index
+    @users = User.all
   end
 
   def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to root_url, notice: 'Пользователь успешно зарегистрирован!'
+    else
+      render 'new'
+    end
   end
 
   def edit
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Данные обновленны'
+    else
+      render 'edit'
+    end
+  end
+
   def show
-    @user = User.new(
-      name: 'Vadim',
-      username: 'installero',
-      avatar_url: "https://avatars.mds.yandex.net/get-kino-vod-films-gallery/28788/47e2fd514411e18b76af786d7417062d/280x178_2"
-    )
+    @questions = @user.questions.order(created_at: :desc)
 
-    @questions = [
-      Question.new(text: 'Как дела?', created_at: Date.parse('23.11.2020')),
-      Question.new(text: 'В чем смысл жизни?', created_at: Date.parse('23.11.2020'))
-    ]
+    @new_question = @user.questions.build
+  end
 
-    @new_question = Question.new
+  private
+
+  def load_user
+    @user ||= User.find params[:id]
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url)
   end
 end
