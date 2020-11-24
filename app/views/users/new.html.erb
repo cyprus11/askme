@@ -8,7 +8,7 @@
         <% if @user.errors.any? %>
           <div class="form-errors">
             <ul>
-              <% for message in @user.errors.full_message %>
+              <% @user.errors.full_messages.each do |message| %>
                 <li class="form-error-message"><%= message %></li>
               <% end %>
             </ul>
