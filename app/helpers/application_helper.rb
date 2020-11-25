@@ -7,9 +7,7 @@ module ApplicationHelper
     end
   end
 
-  def questions_form_count(params)
-    q_count = params[:count]
-    q_count -= 1 if params[:count_type] == 'all' || params[:count_type] == 'without'
+  def questions_form_count(q_count)
     q_count %= 100 if q_count > 100
     q_count %= 10 if q_count > 20
 
