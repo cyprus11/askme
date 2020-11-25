@@ -15,4 +15,8 @@ module ApplicationHelper
     return "#{q_count} вопроса" if q_count.between?(2, 4)
     "#{q_count} вопросов"
   end
+
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
+  end
 end
