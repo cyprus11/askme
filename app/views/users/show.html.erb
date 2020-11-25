@@ -42,7 +42,9 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <div class="questions-count text-lead">
-      <h3><%= questions_form_count(@questions.size) %></h3>
+      <h3>Всего: <%= questions_form_count(@questions.size) %></h3>
+      <h3>Неотвеченных: <%= questions_form_count(@questions.select { |q| q.answer.blank? }.size) %></h3>
+      <h3>Отвеченных: <%= questions_form_count(@questions.select { |q| !q.answer.blank? }.size) %></h3>
     </div>
     <div class="questions-list">
       <% @questions.each do |question| %>
