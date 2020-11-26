@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     @questions = @user.questions.order(created_at: :desc)
 
     @background_color = @user.color
+    @word_forms = %w[вопрос вопроса вопросов]
     @new_question = @user.questions.build
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count

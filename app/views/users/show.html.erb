@@ -28,15 +28,15 @@
   <div class="user-statistics container text-center">
     <div class="column-1-3">
       <h1 class="title-small">Всего</h1>
-      <p><%= sklonyator(@questions_count, %w[вопрос вопроса вопросов]) %></p>
+      <p><%= sklonyator(@questions_count, @word_forms) %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small">С ответом</h1>
-      <p><%= sklonyator(@answers_count, %w[вопрос вопроса вопросов]) %></p>
+      <p><%= sklonyator(@answers_count, @word_forms) %></p>
     </div>
     <div class="column-1-3">
       <h1 class="title-small">Без ответа</h1>
-      <p><%= sklonyator(@unanswered_count, %w[вопрос вопроса вопросов]) %></p>
+      <p><%= sklonyator(@unanswered_count, @word_forms) %></p>
     </div>
   </div>
 </div>
