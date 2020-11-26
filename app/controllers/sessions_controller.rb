@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user.present?
       session[:user_id] = user.id
-      redirect_to root_url, notice: 'Вы успешно вошли'
+      redirect_to root_path, notice: 'Вы успешно вошли'
     else
       flash.now.alert = 'Неправильные данные для входа'
       render 'new'
@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: 'Вы вышли, приходите ещё'
+    redirect_to root_path, notice: 'Вы вышли, приходите ещё'
   end
 end
