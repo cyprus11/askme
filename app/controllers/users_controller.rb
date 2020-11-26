@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def show
     @questions = @user.questions.order(created_at: :desc)
 
-    @background_color = @user.color || '#005a55'
+    @background_color = @user.color
     @new_question = @user.questions.build
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,
+    params.require(:user).permit(:email, :password, :color, :password_confirmation,
                                  :name, :username, :avatar_url)
   end
 

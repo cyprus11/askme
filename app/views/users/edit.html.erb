@@ -40,6 +40,11 @@
         </div>
 
         <div class="form-field">
+          <%= f.label 'Цвет фона вашего профиля', class: 'form-label' %>
+          <%= f.color_field :color, value: @user.color, class: 'form-color-field' %>
+        </div>
+
+        <div class="form-field">
           <%= f.label :password, 'Пароль', class: 'form-label' %>
           <%= f.password_field :password, class: 'form-text-field' %>
         </div>
