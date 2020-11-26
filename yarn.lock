@@ -4031,14 +4031,7 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jquery-minicolors@^2.1.10:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/jquery-minicolors/-/jquery-minicolors-2.1.10.tgz#b29eea541d9a32b4e26923168fb2c16271867379"
-  integrity sha1-sp7qVB2aMrTiaSMWj7LBYnGGc3k=
-  dependencies:
-    jquery ">= 1.7.x"
-
-"jquery@>= 1.7.x", jquery@^3.5.1:
+jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
