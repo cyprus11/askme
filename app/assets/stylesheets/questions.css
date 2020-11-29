@@ -41,3 +41,12 @@
 .question-actions a {
   margin-left: 10px;
 }
+
+.question-info {
+  display: flex;
+}
+
+.question-author {
+}
+
+
