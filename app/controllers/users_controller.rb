@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def show
     @questions = @user.questions.order(created_at: :desc)
 
-    @background_color = @user.color
+    @background_color = "background:#{@user.color}"
     @word_forms = %w[вопрос вопроса вопросов]
     @new_question = @user.questions.build
     @questions_count = @questions.count
