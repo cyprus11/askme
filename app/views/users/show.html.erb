@@ -59,11 +59,13 @@
 </div>
 
 <div class="column-3-4">
-  <div class="user-questions buffer-both">
-    <div class="questions-list">
-      <% @questions.each do |question| %>
-        <%= render partial: 'questions/question', object: question %>
-      <% end %>
+  <% if @questions.any? %>
+    <div class="user-questions buffer-both">
+      <div class="questions-list">
+        <% @questions.each do |question| %>
+          <%= render partial: 'questions/question', object: question %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
