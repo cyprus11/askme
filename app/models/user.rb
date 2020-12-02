@@ -5,16 +5,19 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
   EMAIL_REGEX = /\A[a-z0-9\_]+\.?[a-z0-9\_.]+@[a-z0-9\.]+\.[a-z]+\z/
   USERNAME_REGEX = /\A\w+\z/
+  COLOR_REGEX = /\A[#][\da-z]{6}\z/
 
   attr_accessor :password
 
   has_many :questions, dependent: :destroy
 
-  validates :email, :username, presence: true
+  validates :email, :username, :color, presence: true
   validates :email, :username, uniqueness: true
   validates :email, format: { with: EMAIL_REGEX }
   validates :username, length: { maximum: 40 }
   validates :username, format: { with: USERNAME_REGEX }
+  validates :color, length: { maximum: 7 }
+  validates :color, format: { with: COLOR_REGEX }
   validates :password, presence: true, on: :create
   validates :password, confirmation: true
 
