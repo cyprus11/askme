@@ -5,7 +5,7 @@
   <div class="question-content">
     <div class="question-author">
       <% if question.author.present? %>
-        <%= link_to question.author.username, user_path(question.author)  %>
+        <%= link_to question.author.username, user_path(question.author) %>
       <% else %>
         <p>Аноним</p>
       <% end %>
@@ -15,8 +15,17 @@
       <%= question.text %>
     </div>
 
+    <% if question.hashtags.any? %>
+      <div class="question-hashtags">
+        <p>
+          <%= render question.hashtags %>
+        </p>
+      </div>
+    <% end %>
+
     <% if question.answer.present? %>
       <div class="question-answer text-lead">
+        <h3>Ответ: </h3>
         <%= question.answer if question.answer.present? %>
       </div>
     <% end %>

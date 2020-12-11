@@ -1,0 +1,19 @@
+.hashtag {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: white;
+}
+
+.question-hashtags {
+  font-size: 1em;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.hashtag-link {
+  color: red;
+}
+
+.hashtag-link:hover {
+  text-decoration-line: underline;
+}

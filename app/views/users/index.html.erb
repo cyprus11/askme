@@ -10,4 +10,14 @@
       </div>
     </div>
   <% end %>
+  <div class="hashtags">
+    <% if @hashtags.any? %>
+    <h2>Список хэштегов:</h2>
+      <p>
+        <%= render @hashtags %>
+      </p>
+    <% else %>
+    <em>нет хэштегов</em>
+    <% end %>
+  </div>
 </div>
