@@ -9,6 +9,7 @@ class Question < ApplicationRecord
   validates :answer, presence: true, on: :update
   after_save :find_and_create_tags
   after_update :find_and_create_tags
+  before_update :remove_hashtags
   before_destroy :remove_hashtags
 
   private
@@ -22,17 +23,12 @@ class Question < ApplicationRecord
   end
 
   def find_and_create_tags
-    tags_regex = /#[[:word:]]+/
-    text_tags = text.scan(tags_regex)
-    answer_tags = []
-    answer_tags = answer.scan(tags_regex) unless answer.nil?
-    (text_tags | answer_tags).each do |tag|
-      find_result = find_hashtag(tag)
-      if find_result.nil?
-        hashtags.create!(text: tag)
-      else
-        hashtags << find_result unless hashtags.include?(find_result)
-      end
+    tags = text.scan(Hashtag::HASHTAG_REGEX) |
+      (answer&.scan(Hashtag::HASHTAG_REGEX) || [])
+
+    tags.each do |tag|
+      new_tag = Hashtag.find_or_create_by(text: tag.downcase)
+      hashtags << new_tag unless hashtags.include?(new_tag)
     end
   end
 end
