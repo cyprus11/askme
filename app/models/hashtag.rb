@@ -1,7 +1,8 @@
 class Hashtag < ApplicationRecord
   HASHTAG_REGEX = /#[[:word:]]+/
 
-  has_and_belongs_to_many :questions
+  has_many :hashtags_questions
+  has_many :questions, through: :hashtags_questions
 
   validates :text, format: { with: HASHTAG_REGEX }
   validates :text, length: { minimum: 2 }
