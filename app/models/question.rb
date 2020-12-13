@@ -6,7 +6,6 @@ class Question < ApplicationRecord
 
   validates :text, length: { maximum: 255 }
   validates :text, presence: true, on: :create
-  validates :answer, presence: true, on: :update
   after_save :find_and_create_tags
   after_update :find_and_create_tags
   before_update :remove_hashtags
