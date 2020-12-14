@@ -1,21 +1,19 @@
 class Question < ApplicationRecord
   belongs_to :user
   belongs_to :author, class_name: 'User', optional: true
-  has_many :hashtags_questions
+  has_many :hashtags_questions, dependent: :destroy
   has_many :hashtags, through: :hashtags_questions
 
   validates :text, length: { maximum: 255 }
   validates :text, presence: true, on: :create
-  after_save :find_and_create_tags
-  after_update :find_and_create_tags
+  after_save_commit :find_and_create_tags
   before_update :remove_hashtags
-  before_destroy :remove_hashtags
+  before_destroy :remove_hashtags, prepend: true
 
   private
 
   def remove_hashtags
-    tags = hashtags
-    tags.each do |tag|
+    hashtags.each do |tag|
       hashtags.delete(tag)
       tag.destroy unless tag.questions.any?
     end
