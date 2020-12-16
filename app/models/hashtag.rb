@@ -10,6 +10,8 @@ class Hashtag < ApplicationRecord
 
   before_save :downcase_text
 
+  scope :with_questions, -> { joins(:questions).uniq}
+
   private
 
   def downcase_text
