@@ -5,6 +5,7 @@
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+require("turbolinks")
 require("channels")
 require("packs/custom")
 

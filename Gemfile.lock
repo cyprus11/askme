@@ -69,6 +69,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    json (2.4.0)
     listen (3.3.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -131,6 +132,8 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recaptcha (5.6.0)
+      json
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -145,6 +148,9 @@ GEM
     sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
     web-console (4.1.0)
@@ -172,8 +178,10 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rails_12factor
+  recaptcha
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
+  turbolinks (~> 5.2.0)
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
