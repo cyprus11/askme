@@ -33,4 +33,4 @@ $ rails db:migrate
 $ rails s
 ```
 
-Так же рабочий вариант можно посмотреть по этой [https://protected-woodland-41348.herokuapp.com/](ссылке).
+Так же рабочий вариант можно посмотреть по этой [ссылке](https://protected-woodland-41348.herokuapp.com/).
