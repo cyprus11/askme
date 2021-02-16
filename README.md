@@ -1,24 +1,36 @@
-# README
+# Приложение AskMe.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Данное приложение позволяет задавать зарегистрированным пользователям вопросы, как анонимно, так и не анонимно.
 
-Things you may want to cover:
+Приложение реализовано на Ruby 2.7.2 и Rails 6.0.
 
-* Ruby version
+### Запуск
 
-* System dependencies
+1. Склонирует себе репозиторий:
 
-* Configuration
+```
+$ git clone git@github.com:cyprus11/askme.git
+```
 
-* Database creation
+Или просто скачайте и распакуйте в какую-нибудь папку.
 
-* Database initialization
+2. Установите гемы:
 
-* How to run the test suite
+```
+$ bundle
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Создайте базу и прогоните миграции:
 
-* Deployment instructions
+```
+$ rails db:create
+$ rails db:migrate
+```
 
-* ...
+4. Запуск сервера:
+
+```
+$ rails s
+```
+
+Так же рабочий вариант можно посмотреть по этой [https://protected-woodland-41348.herokuapp.com/](ссылке).
