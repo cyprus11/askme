@@ -10,6 +10,8 @@ gem 'rails_12factor'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5.2.0'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'ed25519',  '>= 1.2', '< 2.0'
 
 group :production do
   gem 'pg'
