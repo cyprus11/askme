@@ -12,7 +12,5 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  user: deploy
-  password: QwertyAsdf123
-  database: askme
+  <<: *default
+  database: db/production.sqlite3
